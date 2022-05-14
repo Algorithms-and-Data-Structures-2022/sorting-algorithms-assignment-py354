@@ -11,10 +11,7 @@
 #include "assignment/merge_sort.hpp"
 
 using namespace std;
-using assignment::binary_search;
-using assignment::InsertionSort;
-using assignment::linear_search;
-using assignment::median_of_three;
+using assignment::HeapSort;
 
 int main() {
 
@@ -25,15 +22,13 @@ int main() {
   }
   cout << "\n";
 
-////  InsertionSort sort;
-//  auto sort = InsertionSort(assignment::binary_search);
-//  sort.Sort(arr);
-//
-//  for (int i = 0; i < arr.size(); i++) {
-//    cout << arr[i] << " ";
-//  }
+  HeapSort s;
+  s.Sort(arr);
 
-  cout << median_of_three(arr, 0, 3);
+  for (int i = 0; i < arr.size(); i++) {
+    cout << arr[i] << " ";
+  }
+  cout << "\n";
 
   return 0;
 }
