@@ -4,42 +4,50 @@
 
 #include "assignment/partitioning.hpp"  // middle_of
 
+#include <iostream>
+using namespace std;
+
 namespace assignment {
 
   int linear_search(const std::vector<int>& arr, int index) {
-
     // итерация всех предыдущих элементов [0, index - 1] (они находятся в отсортированном порядке)
-    for (int curr_pos = -1 /* ... */; false /* условие ... */; /* обновление curr_pos ... */) {
-
-      // если текущий элемент меньше или равен вставляемому, позиция для вставки найдена ...
+    for (int curr_pos = 0; curr_pos < index; curr_pos += 1) {
+      if (arr[index] <= arr[curr_pos]) {
+        return curr_pos;
+      }
     }
 
-    return -1;  // здесь что-то не так ...
+    return index;  // здесь что-то не так ...
   }
 
   int binary_search(const std::vector<int>& arr, int index) {
 
     // начало, конец и середина области поиска места для вставки [0, index - 1]
-    int start = -1 /* здесь что-то не так ... */;
-    int stop = -1 /* здесь что-то не так ... */;
-    int middle = -1 /* здесь что-то не так ... */;
+    int start = 0 /* здесь что-то не так ... */;
+    int stop = index - 1 /* здесь что-то не так ... */;
+    int middle = stop / 2 /* здесь что-то не так ... */;
 
     // ищем до тех пор, пока границы не схлопнулись
     while (start <= stop) {
 
       // возвращаем позицию для вставки
       if (arr[index] == arr[middle]) {
-        return -1 /* здесь что-то не так ... */;
+        return middle /* здесь что-то не так ... */;
       }
 
       // обновляем границы области поиска ...
+      if (arr[index] < arr[middle]) {
+        stop = middle - 1;
+      } else {
+        start = middle + 1;
+      }
 
       // обновляем середину области поиска
-      middle = middle_of(-1, -1);  // здесь что-то не так ...
+      middle = middle_of(start, stop);  // здесь что-то не так ...
     }
 
     // в конечном счете возвращаем начало последней области поиска
-    return -1;  // здесь что-то не так ...
+    return start;  // здесь что-то не так ...
   }
 
   void InsertionSort::Sort(std::vector<int>& arr) const {
@@ -52,6 +60,11 @@ namespace assignment {
       // поиск индекса для вставки элемента с индексом index в область [0, index - 1]
       const int ins_index = searcher_(arr, index);
 
+      if (ins_index != index) {
+        int elem = arr[index];
+        std::copy(arr.data() + ins_index, arr.data() + index, arr.data() + ins_index + 1);
+        arr[ins_index] = elem;
+      }
       // если индекс вставки не совпадает с текущей позицией элемента,
       // производим вставку элемента на вычисленную позицию (std::copy или цикл for) ...
     }

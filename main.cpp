@@ -11,14 +11,24 @@
 #include "assignment/merge_sort.hpp"
 
 using namespace std;
-using namespace assignment;
+using assignment::HeapSort;
 
 int main() {
 
-  std::vector<int> arr = {-39, -79};
+  std::vector<int> arr = {-39, -79, 100, 5};
 
-  InsertionSort sort;
-  sort.Sort(arr);
+  for (int i = 0; i < arr.size(); i++) {
+    cout << arr[i] << " ";
+  }
+  cout << "\n";
+
+  HeapSort s;
+  s.Sort(arr);
+
+  for (int i = 0; i < arr.size(); i++) {
+    cout << arr[i] << " ";
+  }
+  cout << "\n";
 
   return 0;
 }
